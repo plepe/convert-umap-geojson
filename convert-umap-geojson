@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+
+let data = JSON.parse(fs.readFileSync('data.umap'))
+
+for (let i = 0; i < data.layers.length; i++) {
+  data.layers[i].features.forEach(f => f.properties._layer = data.layers[i]._storage.name)
+}
+
+let features = data.layers[0].features
+for (let i = 1; i < data.layers.length; i++) {
+  features = features.concat(data.layers[i])
+}
+
+data = {type:'FeatureCollection', features}
+
+fs.writeFileSync('data.geojson', JSON.stringify(data, null, '    '))
