@@ -1,6 +1,6 @@
 {
   "name": "convert-umap-geojson",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Convert a UMap file to GeoJSON",
   "repository": "https://github.com/plepe/convert-umap-geojson",
   "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
