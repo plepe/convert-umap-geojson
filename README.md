@@ -3,6 +3,5 @@ UMap offers a save to GeoJSON option, but it will discard the layer information.
 
 ## Usage
 ```sh
-./convert-umap-geojson
+./convert-umap-geojson <data.umap >data.geojson
 ```
-It will take a file data.umap and save it as data.geojson
