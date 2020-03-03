@@ -2,17 +2,22 @@
 
 const fs = require('fs')
 
+// read data from stdin
 var data = JSON.parse(fs.readFileSync(0, 'utf-8'))
 
-for (let i = 0; i < data.layers.length; i++) {
-  data.layers[i].features.forEach(f => f.properties._layer = data.layers[i]._storage.name)
-}
+// for each layer update each feature with the _layer property
+data.layers.forEach(layer =>
+  layer.features.forEach(f => f.properties._layer = layer._storage.name)
+)
 
-let features = data.layers[0].features
-for (let i = 1; i < data.layers.length; i++) {
-  features = features.concat(data.layers[i].features)
-}
+// now collect the features of all layers into a single array
+let features = data.layers.reduce(
+  (features, layer) => features.concat(layer.features),
+  []
+)
 
+// create final GeoJSON structure
 data = {type:'FeatureCollection', features}
 
+// print
 console.log(JSON.stringify(data, null, '    '))
